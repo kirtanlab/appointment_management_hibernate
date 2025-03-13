@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.training.project.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -26,7 +27,18 @@ public class DoctorService {
     private PatientDaoImp patientDao;
     private ScheduleDaoImp scheduleDao;
 	private AppointmentDaoImp appointmentDao;
-	
+
+	public DoctorService() {
+		try {
+			this.sessionFactory = HibernateUtil.getSessionFactory();
+			if (this.sessionFactory == null) {
+				System.err.println("Failed to initialize SessionFactory in DoctorService constructor");
+			}
+		} catch (Exception e) {
+			System.err.println("Error initializing SessionFactory: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	/*
 	 * Get all appointments of patient for present day
 	 */

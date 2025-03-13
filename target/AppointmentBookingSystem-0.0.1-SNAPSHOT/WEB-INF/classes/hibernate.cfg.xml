@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- SQL Server configuration -->
+		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:14330;database=sa;encrypt=false;trustServerCertificate=true</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password">YourStrong@Passw0rd</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+		<property name="hibernate.connection.pool_size">10</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<!-- Mapping annotated classes -->
+		<mapping class="com.training.project.model.Role"/>
+		<mapping class="com.training.project.model.User"/>
+		<mapping class="com.training.project.model.UserDetail"/>
+		<mapping class="com.training.project.model.Patient"/>
+		<mapping class="com.training.project.model.Doctor"/>
+		<mapping class="com.training.project.model.Schedule"/>
+		<mapping class="com.training.project.model.AppointmentsStatus"/>
+		<mapping class="com.training.project.model.Appointment"/>
+		<mapping class="com.training.project.model.MedicalRecord"/>
+	</session-factory>
+</hibernate-configuration>

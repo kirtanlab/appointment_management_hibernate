@@ -16,16 +16,16 @@ public class App {
             // Load Hibernate session factory
         	SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
 
-        	/*RoleService roleService = new RoleService(sessionFactory);
-        	
-        	Role r1=new Role("Admin");
-        	createdRole(roleService, r1);
-        	
-        	Role r2=new Role("Patient");
-        	createdRole(roleService, r2);
-        	
-        	Role r3=new Role("Doctor");
-        	createdRole(roleService, r3);*/
+//        	RoleService roleService = new RoleService(sessionFactory);
+//
+//        	Role r1=new Role("Admin");
+//        	createdRole(roleService, r1);
+//
+//        	Role r2=new Role("Patient");
+//        	createdRole(roleService, r2);
+//
+//        	Role r3=new Role("Doctor");
+//        	createdRole(roleService, r3);
         	
 //        	UserService userService = new UserService(sessionFactory);
 //        	RoleDaoImp roledao = new RoleDaoImp();
@@ -57,13 +57,13 @@ public class App {
         
     }
     
-//    private static void createdRole(RoleService roleService, Role r) {
-//		boolean isCreated=roleService.create(r);
-//        if(isCreated) {
-//        	System.out.println(r+" added to record");
-//        }
-//        else {
-//        	System.out.println("Failed to added");
-//        }
-//	}
+    private static void createdRole(RoleService roleService, Role r) {
+		boolean isCreated=roleService.create(r);
+        if(isCreated) {
+        	System.out.println(r+" added to record");
+        }
+        else {
+        	System.out.println("Failed to added");
+        }
+	}
 }

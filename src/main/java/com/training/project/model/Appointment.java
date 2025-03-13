@@ -27,7 +27,7 @@ public class Appointment {
 	@Column(name = "token_no")
     private Integer tokenNo;
 	
-	@Column(name = "reason", columnDefinition = "CLOB")
+	@Column(name = "reason", columnDefinition = "TEXT")
     private String reason;
     
     @Column(name="created_at",updatable = false)

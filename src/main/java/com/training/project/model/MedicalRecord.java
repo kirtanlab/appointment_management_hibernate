@@ -19,17 +19,17 @@ public class MedicalRecord {
 	@Column(name = "record_id")
     private Integer recordId;
 	
-	@Column(name = "diagnosis", columnDefinition = "CLOB")
+	@Column(name = "diagnosis", columnDefinition = "TEXT")
     private String diagnosis;
     
     @Lob
     @Column(name = "medical_report")
     private Blob medicalReport;
     
-    @Column(name = "treatment", columnDefinition = "CLOB")
+    @Column(name = "treatment", columnDefinition = "TEXT")
     private String treatment;
     
-    @Column(name = "notes", columnDefinition = "CLOB")
+    @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
     
     @Column(name="created_at",updatable = false)

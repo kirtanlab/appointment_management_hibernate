@@ -3,6 +3,8 @@ package com.training.project.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import com.training.project.util.HibernateUtil;
 import org.hibernate.*;
 import org.hibernate.query.Query;
 import com.training.project.dao.Imp.*;
@@ -15,6 +17,19 @@ public class PatientService {
 	private AppointmentDaoImp appointmentDao;
 	private DoctorDaoImp doctorDao;
 	private UserDaoImp userDao;
+
+	public PatientService() {
+		try {
+			this.sessionFactory = HibernateUtil.getSessionFactory();
+			if (this.sessionFactory == null) {
+				System.err.println("Failed to initialize SessionFactory in DoctorService constructor");
+			}
+		} catch (Exception e) {
+			System.err.println("Error initializing SessionFactory: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 	
 	public PatientService(SessionFactory sessionFactory) {
 		super();
