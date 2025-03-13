@@ -1,5 +1,5 @@
-# Use a base image with Java and Maven pre-installed
-FROM maven:3.8.5-openjdk-17 AS builder
+# Use a base image with Java 21 and Maven
+FROM maven:3.9.5-eclipse-temurin-21 AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download project dependencies (this will be cached if pom.xml doesn't change)
-RUN mvn dependency:go-offline
+RUN mvn dependency:go-offline -B
 
 # Copy the source code to the working directory
 COPY src ./src
@@ -16,8 +16,8 @@ COPY src ./src
 # Package the application
 RUN mvn clean package -DskipTests
 
-# Use a minimal base image for running the application
-FROM eclipse-temurin:17-jre-focal
+# Use Java 21 for the runtime image
+FROM eclipse-temurin:21-jre
 
 # Set the working directory
 WORKDIR /app
@@ -25,8 +25,15 @@ WORKDIR /app
 # Copy the packaged application from the builder stage
 COPY --from=builder /app/target/*.war ./app.war
 
-# Expose the port the application will run on (adjust as needed)
+# Copy webapp-runner if it exists in the builder stage
+COPY --from=builder /app/target/dependency/webapp-runner*.jar ./webapp-runner.jar 2>/dev/null || true
+
+# Expose the port the application will run on
 EXPOSE 8080
 
-# Command to run the application.  You might need to adjust this depending on your application server.
-CMD ["java", "-jar", "app.war"]
+# Check if webapp-runner exists and use it, otherwise use the WAR directly
+CMD if [ -f webapp-runner.jar ]; then \
+        java -jar webapp-runner.jar app.war; \
+    else \
+        java -jar app.war; \
+    fi
